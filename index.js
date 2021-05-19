@@ -20,5 +20,5 @@ io.on("connection", function(socket){
 
 
 http.listen(80, function() {
-	console.log("listen in 3000");
+	console.log("listen in 80");
 });
