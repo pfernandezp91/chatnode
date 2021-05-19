@@ -22,5 +22,5 @@ io.on("connection", function(socket){
 	console.log("listen in 3000");
 });*/
 
-const port = http.env.PORT || 3000;
+var port = http.listen(process.env.PORT || 3000);
 app.listen(port);
