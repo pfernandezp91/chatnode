@@ -7,32 +7,30 @@
 	<body>
 		<div class="container">
 			<h1>Chat tiempo real</h1>
-			
-			<div id="printmessage"></div>
-			<div id="formulariomensajes">
-				<input type="text" id="txtusuario" class="form-control w-100" placeholder="user"><br>
-				<input type="text" id="txtmensaje" class="form-control w-100" placeholder="mensaje..."><br>
-				<button type="button" class="btn btn-success w-100" id="btn-msg">Enviar</button>
+			<div class="row">
+				<div class="col-md-6 order-2 order-md-1" id="formulariomensajes">
+					<input type="text" id="txtusuario" class="form-control w-100" placeholder="user"><br>
+					<input type="text" id="txtmensaje" class="form-control w-100" placeholder="mensaje..."><br>
+					<button type="button" class="btn btn-success w-100" id="btn-msg">Enviar</button>
+				</div>
+				<div class="col-md-6 order-1 order-md-2" id="printmessage"></div>
 			</div>
 		</div>
 		
 		<script src="/socket.io/socket.io.js"></script>
-		<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 		<script>
-			$(function(){
-				var socket = io();
-				
-				socket.on("nuevomensaje", function(mensaje) {
-					document.getElementById("printmessage").innerHTML += "<div class='mensaje'>"+mensaje+"</div>";
-				});
-				
-				document.getElementById("btn-msg").addEventListener("click", function(){
-					var txtmensaje = document.getElementById("txtmensaje");
-					var txtusuario = document.getElementById("txtusuario");
-					var printmensaje = "<strong>"+txtusuario.value+":</strong> " + txtmensaje.value;
-		            socket.emit("nuevomensaje", printmensaje);
-		            txtmensaje.value = "";
-				});
+			var socket = io();
+			
+			socket.on("nuevomensaje", function(mensaje) {
+				document.getElementById("printmessage").innerHTML += "<div class='mensaje'>"+mensaje+"</div>";
+			});
+			
+			document.getElementById("btn-msg").addEventListener("click", function(){
+				var txtmensaje = document.getElementById("txtmensaje");
+				var txtusuario = document.getElementById("txtusuario");
+				var printmensaje = "<strong>"+txtusuario.value+":</strong> " + txtmensaje.value;
+	            socket.emit("nuevomensaje", printmensaje);
+	            txtmensaje.value = "";
 			});
 		</script>
 	</body>
